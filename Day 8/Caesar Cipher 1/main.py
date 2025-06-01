@@ -11,7 +11,7 @@ def encrypt(original_text, shift_amount):
     for letter in original_text:
         shift=alphabet.index(letter)+shift_amount
         if shift >= 26:
-            shift = shift - 26
+            shift -= 26
 
         encrypt_text += alphabet[shift]
     print(f"Here is the encoded result: {encrypt_text}")
