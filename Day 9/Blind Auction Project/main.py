@@ -1,5 +1,5 @@
 from art import logo
-
+import os
 
 # TODO-1: Ask the user for input
 # Input Data
@@ -17,7 +17,8 @@ while repeat == "y" :
 
     # TODO-2: Save data into dictionary {name: price}
     bid_dict[name]= bid
-    print("\n" * 10)
+    #print("\n" * 10)
+    os.system('clear')
 
 # TODO-4: Compare bids in dictionary
 max_bid = max(bid_dict.values())
