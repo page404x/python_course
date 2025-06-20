@@ -46,30 +46,28 @@ def result(t_c_card, t_p_card):
     return r
 
 
-cpu_card = deal_card(2)
 
+cpu_card = deal_card(2)
 total_cpu_card = sum_card_value(cpu_card)
 c_card = showing_card(cpu_card)
 c_card[1] = "***"
-print(f"CPU Card : {c_card} and Total {total_cpu_card}")
+print(f"CPU Card : {c_card}")
 
 
 player_card = deal_card(2)
 total_player_card = sum_card_value(player_card)
 p_card = showing_card(player_card)
-print(f"Player Card : {p_card} and Total {total_player_card}")
+print(f"Player Card : {p_card}")
 
 deal_more = input("Do you want to deal more card? ")
 if deal_more == "y":
     player_card.update(deal_card(1))
     total_player_card = sum_card_value(player_card)
-    #print(f"Player Card : {player_card} and Total {total_player_card}")
 
 if total_cpu_card < 17:
     print("CPU deal more card.... ")
     cpu_card.update(deal_card(1))
     total_cpu_card = sum_card_value(cpu_card)
-    #print(f"CPU Card : {cpu_card} and Total {total_cpu_card}")
 
 print(f"CPU Card are : {showing_card(cpu_card)}")
 print(f"Player Card are: {showing_card(player_card)}")
