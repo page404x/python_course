@@ -1,77 +1,78 @@
 import art
 import random
-
 print(art.logo)
 
-cards = {
-    "AS":11,
-    "2" :2,
-    "3" :3,
-    "4" :4,
-    "5" :5,
-    "6" :6,
-    "7" :7,
-    "8" :8,
-    "9" :9,
-    "10":10,
-    "Jack":10,
-    "Queen":10,
-    "King":10
-}
+cards = [11, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10]
 
-def deal_card():
-    new_card = {}
-    key = random.choice(list(cards.keys()))
-    new_card[key] = cards[key]
-    return new_card
+def deal_card(limit):
+    counter = 0
+    card = {}
+    while counter < limit:
+        index = random.randrange(len(cards))
+        card[index] = cards[index]
+        counter +=1
+    return card
 
-def card_result(card):
-    return sum(card.values())
+def sum_card_value(card_value):
+    total = sum(card_value.values())
+    if total > 21:
+        total %= 21
+    return total
 
-def card_winner(c_result, p_result):
-    if c_result > 21:
-        c_result %= 21
-    if p_result > 21:
-        p_result %= 21
-    if c_result < p_result:
-        winner = "Player Win"
+def showing_card(card):
+    show_card =[]
+
+    for key in card:
+        if key == 0:
+            show_card.append("AS")
+        elif key == 10:
+            show_card.append("Jack")
+        elif key == 11:
+            show_card.append("Queen")
+        elif key == 12:
+            show_card.append("King")
+        else:
+            show_card.append(str(key+1))
+    return show_card
+
+
+def result(t_c_card, t_p_card):
+    if t_c_card > t_p_card:
+        r = "You Lose"
+    elif t_c_card < t_p_card:
+        r = "You Win"
     else:
-        winner = "Player Lose"
-    return winner
-
-cpu_card = {}
-
-c_card = deal_card()
-print(c_card)
-key = c_card.keys()
-value = c_card.values()
-card_cpu[key] = value
-print(f"{key} {value} {card_cpu}" )
+        r = "Draw"
+    return r
 
 
-#player_card = deal_card()+deal_card()
+cpu_card = deal_card(2)
+
+total_cpu_card = sum_card_value(cpu_card)
+c_card = showing_card(cpu_card)
+c_card[1] = "***"
+print(f"CPU Card : {c_card} and Total {total_cpu_card}")
 
 
-#print(f"CPU Card : {cpu_card[0]} and {cpu_card[2]} ")
-#print(f"Player Card : {player_card[0]} and {player_card[2]}")
+player_card = deal_card(2)
+total_player_card = sum_card_value(player_card)
+p_card = showing_card(player_card)
+print(f"Player Card : {p_card} and Total {total_player_card}")
 
-#print(sum(cpu_card.values()))
-#print(sum(player_card.values()))
-#deal_again = "y"
-#while deal_again == "y":
-#    deal_again = input("Do you want to deal again? ").lower()
-#    if deal_again == "y":
-#        player_card += deal_card()
-#        print(f"Player Cards : {list(player_card.keys())}")
-#    player_result = card_result(player_card)
-#    if player_result >= 21:
-#        deal_again = "n"
+deal_more = input("Do you want to deal more card? ")
+if deal_more == "y":
+    player_card.update(deal_card(1))
+    total_player_card = sum_card_value(player_card)
+    #print(f"Player Card : {player_card} and Total {total_player_card}")
 
-#cpu_result = card_result(cpu_card)
-#player_result = card_result(player_card)
+if total_cpu_card < 17:
+    print("CPU deal more card.... ")
+    cpu_card.update(deal_card(1))
+    total_cpu_card = sum_card_value(cpu_card)
+    #print(f"CPU Card : {cpu_card} and Total {total_cpu_card}")
 
-#result = card_winner(cpu_result, player_result)
-#print(f"And The Result is : {result}")
-
+print(f"CPU Card are : {showing_card(cpu_card)}")
+print(f"Player Card are: {showing_card(player_card)}")
+print(f"And The Result is : {result(total_cpu_card, total_player_card)}")
 
 
