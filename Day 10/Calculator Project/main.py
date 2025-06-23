@@ -1,3 +1,5 @@
+from art import logo
+
 def add(n1, n2):
     """Simple mathematical function to add 2 given numbers"""
     return n1 + n2
@@ -11,13 +13,14 @@ def multiply(n1, n2):
     return n1 * n2
 
 def divide(n1, n2):
-    """a simple matematical function to dived 2 given numbers"""
+    """a simple mathematical function to dived 2 given numbers"""
     return n1 / n2
 
 math_func = {"+":add, "-" :subtract, "*" : multiply, "/": divide}
 
 repeat = True
 while repeat:
+    print(logo)
     x = int(input("What is your first number: "))
     y = int(input("What is your second number: "))
     operator_symbol = input("Type a mathematical operator : ")
