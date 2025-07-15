@@ -9,21 +9,12 @@ files:
   - name: maths.py
     visible: true
     learner_created: false
-<<<<<<< HEAD
-  - name: fizzbuzz.py
-    visible: true
-    learner_created: true
-  - name: odd_even.py
-    visible: true
-    learner_created: true
-=======
   - name: odd_even.py
     visible: true
     learner_created: true
   - name: fizzbuzz.py
     visible: true
     learner_created: true
->>>>>>> e1a5c6ece246e175c2e659256b5f1415c4fdc196
 status: Solved
 record: -1
 post_submission_on_open: true
