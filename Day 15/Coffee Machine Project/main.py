@@ -31,26 +31,20 @@ resources = {
 }
 
 #TODO 1 - User Input (Espresso/Latte/Cappucino)
-#user_input = input("What Would You Like? (Espresso/Latte/Cappucino? ").lower()
 
-def coffee_ingredient(choice):
-    coffee = MENU[choice]["ingredients"]["coffee"]
-    return coffee
+def resource_remaining(resource_choice):
+    remaining = resources[resource_choice]
+    return remaining
 
-def water_ingredient(choice):
-    water = MENU[choice]["ingredients"]["water"]
-    return water
+money = 0
 
-def milk_ingredient(choice):
-    milk = MENU[choice]["ingredients"]["milk"]
-    return milk
+user_input = input("What Would You Like? (Espresso/Latte/Cappucino? ").lower()
+if user_input == "report":
+    for key in resources:
+        remaining = resources[key]
+        print(f"{key}: {remaining}")
+    print(f"Money: {money}")
 
-def coffee_cost(coffee):
-    cost = MENU[coffee]["cost"]
-    return cost
-
-def resource_remaining(coffee, water, milk):
-    remaining_water = resources["water"]-
 
 
 #TODO 2 - Turn off Machine (OFF)
