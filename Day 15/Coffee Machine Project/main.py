@@ -50,7 +50,7 @@ def coffee_cost(coffee):
     return cost
 
 def resource_remaining(coffee, water, milk):
-    remaining_water = resources["water"]-
+    remaining_water = resources["water"]
 
 
 #TODO 2 - Turn off Machine (OFF)
