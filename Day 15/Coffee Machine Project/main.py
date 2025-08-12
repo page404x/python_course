@@ -56,19 +56,35 @@ def resource_remaining():
     print(f"Money : ${money}")
 
 def money_conversion(num_quarter, num_dimes, num_nickels, num_pennies):
-    quarters_dollar = num_quarter * 0.25
-    dimes_dollar = num_dimes * 0.1
-    nickles_dollar = num_nickels * 0.05
-    pennies_dollar = num_pennies * 0.01
+    quarters_dollar = int(num_quarter)* 0.25
+    dimes_dollar = int(num_dimes) * 0.1
+    nickles_dollar = int(num_nickels) * 0.05
+    pennies_dollar = int(num_pennies) * 0.01
     dollar = quarters_dollar + dimes_dollar + nickles_dollar + pennies_dollar
-    return dollar
+    return round(dollar,2)
+
+def input_money():
+    num_quarters = input("How many quarters: ")
+    num_dimes = input("How many dimes: ")
+    num_nickles = input("How many nickles: ")
+    num_pennies = input("How many pennies : ")
+    return num_quarters, num_dimes, num_nickles, num_pennies
 
 money = 0
 
-user_input = input("What Would You Like? (Espresso/Latte/Cappucino)? ").lower()
+user_input = input("What Would You Like? (Espresso/Latte/Cappuccino)? ").lower()
 if user_input == "report":
    resource_remaining()
-elif user_input == "espresso":
+else:
+    q, d, n, p = input_money()
+    dollar = money_conversion(q,d,n,p)
+    try:
+        changes = dollar - MENU[user_input]["cost"]
+        print(f"Here is ${changes} in changes")
+        print(f"Here is your {user_input} Enjoy!")
+    except KeyError:
+        print("Please input the correct choice")
+
 
 
 
