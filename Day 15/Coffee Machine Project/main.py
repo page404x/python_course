@@ -32,23 +32,6 @@ resources = {
 
 #TODO 1 - User Input (Espresso/Latte/Cappucino)
 
-
-def coffee_ingredient(choice):
-    coffee = MENU[choice]["ingredients"]["coffee"]
-    return coffee
-
-def water_ingredient(choice):
-    water = MENU[choice]["ingredients"]["water"]
-    return water
-
-def milk_ingredient(choice):
-    milk = MENU[choice]["ingredients"]["milk"]
-    return milk
-
-def coffee_cost(coffee):
-    cost = MENU[coffee]["cost"]
-    return cost
-
 def resource_print():
     print(f"Water : {resources['water']}ml")
     print(f"Milk : {resources['milk']}ml")
@@ -60,8 +43,8 @@ def money_conversion(num_quarter, num_dimes, num_nickels, num_pennies):
     dimes_dollar = int(num_dimes) * 0.1
     nickles_dollar = int(num_nickels) * 0.05
     pennies_dollar = int(num_pennies) * 0.01
-    dollar = quarters_dollar + dimes_dollar + nickles_dollar + pennies_dollar
-    return round(dollar,2)
+    fun_dollar = quarters_dollar + dimes_dollar + nickles_dollar + pennies_dollar
+    return round(fun_dollar,2)
 
 def input_money():
     num_quarters = input("How many quarters: ")
@@ -71,14 +54,14 @@ def input_money():
     return num_quarters, num_dimes, num_nickles, num_pennies
 
 def check_resources(choice, not_milk):
-    water = resources["water"] - MENU[choice]["ingredients"]["water"]
-    coffee = resources["coffee"] - MENU[choice]["ingredients"]["coffee"]
+    fun_water = resources["water"] - MENU[choice]["ingredients"]["water"]
+    fun_coffee = resources["coffee"] - MENU[choice]["ingredients"]["coffee"]
     if not not_milk:
-        milk = resources["milk"] - MENU[choice]["ingredients"]["milk"]
+        fun_milk = resources["milk"] - MENU[choice]["ingredients"]["milk"]
     else:
-        milk = resources["milk"]
-    money = MENU[choice]["cost"]
-    return water, coffee, milk, money
+        fun_milk = resources["milk"]
+    fun_money = MENU[choice]["cost"]
+    return fun_water, fun_coffee, fun_milk, fun_money
 
 total_money = 0
 repeat = True
