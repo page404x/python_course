@@ -49,11 +49,11 @@ def coffee_cost(coffee):
     cost = MENU[coffee]["cost"]
     return cost
 
-def resource_remaining():
+def resource_print():
     print(f"Water : {resources['water']}ml")
     print(f"Milk : {resources['milk']}ml")
     print(f"Coffee : {resources['coffee']}g")
-    print(f"Money : ${money}")
+    print(f"Money : ${total_money}")
 
 def money_conversion(num_quarter, num_dimes, num_nickels, num_pennies):
     quarters_dollar = int(num_quarter)* 0.25
@@ -70,26 +70,46 @@ def input_money():
     num_pennies = input("How many pennies : ")
     return num_quarters, num_dimes, num_nickles, num_pennies
 
-money = 0
+def check_resources(choice, not_milk):
+    water = resources["water"] - MENU[choice]["ingredients"]["water"]
+    coffee = resources["coffee"] - MENU[choice]["ingredients"]["coffee"]
+    if not not_milk:
+        milk = resources["milk"] - MENU[choice]["ingredients"]["milk"]
+    else:
+        milk = resources["milk"]
+    money = MENU[choice]["cost"]
+    return water, coffee, milk, money
 
-user_input = input("What Would You Like? (Espresso/Latte/Cappuccino)? ").lower()
-if user_input == "report":
-   resource_remaining()
-else:
-    q, d, n, p = input_money()
-    dollar = money_conversion(q,d,n,p)
-    try:
-        changes = dollar - MENU[user_input]["cost"]
-        print(f"Here is ${changes} in changes")
-        print(f"Here is your {user_input} Enjoy!")
-    except KeyError:
-        print("Please input the correct choice")
-
-
-
-
-
-#TODO 2 - Turn off Machine (OFF)
-#TODO 3 - Print Report
-
+total_money = 0
+repeat = True
+while repeat :
+    user_input = input("What Would You Like? (Espresso/Latte/Cappuccino)? ").lower()
+    no_milk = False
+    if user_input == "report":
+        resource_print()
+    elif user_input == "off":
+        print("Turning OFF Machine")
+        repeat = False
+    else:
+        try:
+            if user_input == "espresso":
+                no_milk = True
+            water, coffee, milk, add_money = check_resources(user_input, no_milk)
+            if water >= 0 and coffee >= 0 and milk >= 0:
+                q, d, n, p = input_money()
+                dollar = money_conversion(q, d, n, p)
+                changes = round(dollar - MENU[user_input]["cost"],2)
+                if changes >= 0:
+                    print(f"Here is ${changes} in changes")
+                    print(f"Here is your {user_input} Enjoy!")
+                    resources["water"] = water
+                    resources["coffee"] = coffee
+                    resources["milk"] = milk
+                    total_money += add_money
+                else:
+                    print("your money is not enough")
+            else:
+                print(f"Resources has been depleted to make {user_input}, please choose another one")
+        except KeyError:
+            print("Please input the correct choice")
 #
